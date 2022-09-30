@@ -1,9 +1,32 @@
-/* Функция, возвращающая случайное целое число из переданного диапазона включительно.
-   С помощью деструктуризации, если передача значения «min» меньше, чем значение «max», то значения будут меняться местами.
-   Функция выведет «-1» если «min» или «max» меньше нуля.
-*/
+const COUNT_OBJECT = 25;
 
-const getRandomIntInclusive = (min, max) => {
+const NAME = [
+  'Григорий',
+  'Виктор',
+  'Павел',
+  'Алексей',
+  'Кирилл'
+];
+
+const MESSAGES = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+
+const DESCRIPTIONS = [
+  'Фото',
+  'Природа Урала',
+  'Кавказские горы',
+  'Моя квартира'
+];
+
+const arrayObjects = [];
+
+const getRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   if (min < 0 || max < 0) {
@@ -14,18 +37,30 @@ const getRandomIntInclusive = (min, max) => {
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-getRandomIntInclusive(1, 10);
 
-/* Функция для проверки максимальной длины строки.
-   Если строка меньше либо равна максимальному значению, то выведет "true", если больше, то выведет "false"
-*/
-
-const checkLongString = (str, maxLength) => {
-  if (String(str).length <= maxLength) {
-    return true;
+const commentsArray = (count) => {
+  const array = [];
+  for(let i = 0; i < count; i++){
+    array.push({
+      id: i,
+      avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+      message: MESSAGES[getRandomNumber(0, MESSAGES.length - 1)],
+      name: NAME[getRandomNumber(0,NAME.length - 1)]
+    });
   }
-  else {
-    return false;
+  return array;
+};
+
+const addPhotos = () => {
+  for(let i = 0; i< COUNT_OBJECT; i++){
+    arrayObjects.push({
+      id: i,
+      url: `photos/${i + 1}.jpg`,
+      description: DESCRIPTIONS[getRandomNumber(0, DESCRIPTIONS.length - 1)],
+      likes: getRandomNumber(15, 200),
+      comments: commentsArray(getRandomNumber(0, 2))
+    });
   }
 };
-checkLongString('Привет', 10);
+
+addPhotos();
