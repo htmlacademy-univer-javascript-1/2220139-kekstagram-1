@@ -10,4 +10,6 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export {getRandomNumber};
+const isEscape = (evt) => evt.key === 'Escape';
+
+export {getRandomNumber, isEscape};
