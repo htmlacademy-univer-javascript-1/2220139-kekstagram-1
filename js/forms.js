@@ -1,12 +1,16 @@
-import {isEscape} from './utils.js';
-import {inputHashtag, pristine, button} from './hashtags-pristine.js';
+import { isEscapeKey } from './utils.js';
+import { inputHashtag, pristine, button } from './hashtags-pristine.js';
 
 const form = document.querySelector('#upload-select-image');
 const file = form.querySelector('#upload-file');
 const buttonCancel = form.querySelector('#upload-cancel');
 
 const onDocumentEscKeyDown = (evt) => {
-  if (isEscape(evt) && !evt.target.classList.contains('text__description') && !evt.target.classList.contains('text__hashtags')) {
+  if (
+    isEscapeKey(evt) &&
+    !evt.target.classList.contains('text__description') &&
+    !evt.target.classList.contains('text__hashtags')
+  ) {
     document.querySelector('.img-upload__overlay').classList.add('hidden');
     document.querySelector('body').classList.remove('modal-open');
     inputHashtag.value = '';
@@ -33,4 +37,4 @@ buttonCancel.addEventListener('click', () => {
   document.removeEventListener('keydown', onDocumentEscKeyDown);
 });
 
-export {file};
+export { file };

@@ -1,28 +1,32 @@
-import { arrayObjects } from './data.js';
-import { addPictureEventHandler } from './full-picture.js';
+import { generateArrayProfiles } from './profile.js';
+import { showFullPicture, renderCommentList } from './full-picture.js';
+
+const dataProfiles = generateArrayProfiles();
 const pictures = document.querySelector('.pictures');
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const pictureTemplate = document
+  .querySelector('#picture')
+  .content.querySelector('.picture');
 
-const fragment = document.createDocumentFragment();
-
-const renderPhoto = (photo) => {
-  const element = pictureTemplate.cloneNode(true);
-
-  element.querySelector('.picture__img').src = photo.url;
-  element.querySelector('.picture__likes').textContent = photo.likes;
-  element.querySelector('.picture__comments').textContent = photo.comments.length;
-
-  addPictureEventHandler(element, photo);
-
-  return element;
+const renderPhoto = (picture) => {
+  const photoBlock = pictureTemplate.cloneNode(true);
+  photoBlock.querySelector('.picture__comments').textContent =
+    picture.comments.length;
+  photoBlock.querySelector('.picture__img').src = picture.url;
+  photoBlock.querySelector('.picture__likes').textContent = picture.likes;
+  photoBlock.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    showFullPicture(picture);
+    renderCommentList();
+  });
+  return photoBlock;
 };
 
 const renderPhotos = () => {
-  arrayObjects.forEach((photo) => {
-    fragment.appendChild(renderPhoto(photo));
+  const pictureFragment = document.createDocumentFragment();
+  dataProfiles.forEach((photo) => {
+    pictureFragment.appendChild(renderPhoto(photo));
   });
-
-  pictures.appendChild(fragment);
+  pictures.appendChild(pictureFragment);
 };
 
-export {renderPhotos};
+export { renderPhotos };

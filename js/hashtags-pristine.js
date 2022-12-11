@@ -57,9 +57,9 @@ const hashtagsHandler = (value) => {
     },
     {
       check: inputArray.some((item) => !/^#[a-za-яё0-9]{1,19}$/i.test(item)),
-      error: 'Хэш-теги содержит недопустимые символы',
+      error: 'Хэш-теги содержат недопустимые символы',
     },
-  ] ;
+  ];
 
   return rules.every((rule) => {
     const isInvalid = !rule.check;
@@ -88,4 +88,4 @@ formUpload.addEventListener('submit', (evt) => {
   pristine.validate();
 });
 
-export {inputHashtag, pristine, button};
+export { inputHashtag, pristine, button };
