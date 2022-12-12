@@ -15,4 +15,4 @@ const getRandomElement = (array) => {
   return array[randomIndex];
 };
 
-export { getRandomElement, getRandomNumber, isEscapeKey };
+export { isEscapeKey, getRandomElement, getRandomNumber };

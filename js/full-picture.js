@@ -8,7 +8,6 @@ const commentLoader = bigPicture.querySelector('.comments-loader');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentContent = commentList.querySelector('.social__comment');
 const counterLoadComment = bigPicture.querySelector('.social__comment-count');
-
 let copyArrayComments = [];
 
 const onDocumentEscKeyDown = (evt) => {
@@ -75,4 +74,4 @@ const showFullPicture = (picture) => {
   commentList.innerHTML = '';
 };
 
-export { showFullPicture, isEscapeKey, renderCommentList };
+export { showFullPicture, renderCommentList };
