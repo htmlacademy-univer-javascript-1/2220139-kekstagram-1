@@ -1,4 +1,6 @@
 import { renderPhotos } from './pictures.js';
-import './form-validation.js';
+import './forms.js';
 import './photoEffects.js';
-renderPhotos();
+import { getServerData } from './api.js';
+
+getServerData(renderPhotos);

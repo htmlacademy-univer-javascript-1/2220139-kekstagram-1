@@ -1,7 +1,5 @@
-import { generateArrayProfiles } from './profile.js';
 import { showFullPicture, renderCommentList } from './full-picture.js';
 
-const dataProfiles = generateArrayProfiles();
 const pictures = document.querySelector('.pictures');
 const pictureTemplate = document
   .querySelector('#picture')
@@ -21,9 +19,9 @@ const renderPhoto = (picture) => {
   return photoBlock;
 };
 
-const renderPhotos = () => {
+const renderPhotos = (serverData) => {
   const pictureFragment = document.createDocumentFragment();
-  dataProfiles.forEach((photo) => {
+  serverData.forEach((photo) => {
     pictureFragment.appendChild(renderPhoto(photo));
   });
   pictures.appendChild(pictureFragment);
