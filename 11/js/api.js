@@ -1,31 +1,25 @@
 import { showAlert } from './utils.js';
 
-const getServerData = (onSuccess) => {
-  fetch('https://26.javascript.pages.academy/kekstagram/data')
+const Urls = {
+  GET: 'https://26.javascript.pages.academy/kekstagram/data',
+  SET: 'https://26.javascript.pages.academy/kekstagram',
+};
+
+const sendRequest = (onSuccess, method, body) => {
+  fetch(
+    Urls[method],
+    {
+      method: method,
+      body: body,
+    },
+  )
     .then((response) => response.json())
-    .then((profilesData) => {
-      onSuccess(profilesData);
+    .then((data) => {
+      onSuccess(data);
     })
     .catch(() => {
-      showAlert('Ошибка');
+      showAlert('Ошибка загрузки изображений');
     });
 };
 
-const sendServerData = (onSuccess, onFail, body) => {
-  fetch('https://26.javascript.pages.academy/kekstagram', {
-    method: 'POST',
-    body,
-  })
-    .then((response) => {
-      if (response.ok) {
-        onSuccess();
-      } else {
-        onFail('Ошибка');
-      }
-    })
-    .catch(() => {
-      onFail('Ошибка');
-    });
-};
-
-export { getServerData, sendServerData };
+export { sendRequest };

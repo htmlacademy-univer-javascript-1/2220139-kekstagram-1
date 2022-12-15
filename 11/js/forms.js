@@ -2,7 +2,7 @@ import { isEscapeKey } from './utils.js';
 import './scalePhoto.js';
 import { resetScale } from './scalePhoto.js';
 import { resetEffects } from './photoEffects.js';
-import { sendServerData } from './api.js';
+import { sendRequest } from './api.js';
 import { pristine } from './validate.js';
 
 const file = document.querySelector('#upload-file');
@@ -130,27 +130,21 @@ const unblockSubmitButton = () => {
   button.textContent = 'Сохранить';
 };
 
-const sendToServer = (onSuccess) => {
-  formUpload.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const isValid = pristine.validate();
-    if (isValid) {
-      blockSubmitButton();
-      sendServerData(
-        () => {
-          onSuccess();
-          messageStatusSubmit(onSuccessMessage);
-          unblockSubmitButton();
-        },
-        () => {
-          messageStatusSubmit(onErrorMessage);
-          unblockSubmitButton();
-        },
-        new FormData(evt.target)
-      );
-    }
-  });
+const onSuccess = () => {
+  blockSubmitButton();
+  closingImageForm();
+  messageStatusSubmit(onSuccessMessage);
+  unblockSubmitButton();
 };
 
-sendToServer(closingImageForm);
+const onFail = () => {
+  blockSubmitButton();
+  messageStatusSubmit(onErrorMessage);
+  closingImageForm();
+};
+
+formUpload.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(evt.target);
+  sendRequest(onSuccess, onFail, 'POST', formData);
+});
