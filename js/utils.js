@@ -17,6 +17,14 @@ const getRandomElement = (array) => {
   return array[randomIndex];
 };
 
+function debounce(callback, timeoutDelay = 500) {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -38,4 +46,16 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export { isEscapeKey, getRandomElement, getRandomNumber, showAlert };
+const getRandomUniqueElements = (arr) => {
+  const newArray = arr.slice();
+  const elements = [];
+  const newArrayLength = arr.length;
+  for (let i = 0; i < newArrayLength; i++) {
+    const randomId = getRandomNumber(0, newArray.length - 1);
+    elements.push(newArray[randomId]);
+    newArray.splice(randomId, 1);
+  }
+  return elements;
+};
+
+export { isEscapeKey, getRandomElement, getRandomNumber, showAlert, getRandomUniqueElements, debounce, };

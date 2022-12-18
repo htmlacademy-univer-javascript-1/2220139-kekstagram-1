@@ -1,14 +1,10 @@
 import { renderPhotos } from './pictures.js';
 import './forms.js';
 import './photoEffects.js';
-import { sendRequest } from './api.js';
+import { getServerData } from './api.js';
+import { renderFilters } from './filters.js';
 
-let photos = [];
-
-const onSuccess = (data) => {
-  photos = data.slice();
-  renderPhotos(photos);
-  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
-};
-
-sendRequest(onSuccess, 'GET');
+getServerData((photo) => {
+  renderFilters(photo);
+  renderPhotos(photo);
+});
