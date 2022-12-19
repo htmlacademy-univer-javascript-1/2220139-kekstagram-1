@@ -14,8 +14,7 @@ const resetScale = () => {
 const onBiggerButton = () => {
   let parseIntValue = parseInt(scaleValue.value, 10);
   if (parseIntValue < PARAMETRS_SCALE.maxSize) {
-    imgPreview.style.transform = `scale(${(parseIntValue +=
-      PARAMETRS_SCALE.step)}%)`;
+    imgPreview.style.transform = `scale(${parseIntValue += PARAMETRS_SCALE.step}%)`;
     scaleValue.value = `${parseIntValue}%`;
   }
 };
@@ -23,8 +22,7 @@ const onBiggerButton = () => {
 const onSmallerButton = () => {
   let parseIntValue = parseInt(scaleValue.value, 10);
   if (parseIntValue > PARAMETRS_SCALE.minSize) {
-    imgPreview.style.transform = `scale(${(parseIntValue -=
-      PARAMETRS_SCALE.step)}%)`;
+    imgPreview.style.transform = `scale(${parseIntValue -= PARAMETRS_SCALE.step}%)`;
     scaleValue.value = `${parseIntValue}%`;
   }
 };
@@ -38,4 +36,6 @@ uploadScale.addEventListener('click', (evt) => {
   }
 });
 
-export { resetScale };
+export {
+  resetScale
+};

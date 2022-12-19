@@ -79,7 +79,7 @@ const PARAMETRS_SCALE = {
   start: 100,
 };
 
-const NAME = ['Григорий', 'Виктор', 'Павел', 'Алексей', 'Кирилл'];
+const NAMES = ['Григорий', 'Виктор', 'Павел', 'Алексей', 'Кирилл'];
 
 const MESSAGES = [
   'Всё отлично!',
@@ -103,7 +103,7 @@ export {
   randomNumberComments,
   randomNumberID,
   DESCRIPTIONS,
-  NAME,
+  NAMES,
   MESSAGES,
   EFFECTS,
   MAX_HASHTAG_COUNTS,

@@ -1,8 +1,9 @@
 import { isEscapeKey } from './utils.js';
-import { resetScale } from './scalePhoto.js';
-import { resetEffects } from './photoEffects.js';
+import { resetScale } from './scale-photo.js';
+import { resetEffects } from './photo-effects.js';
 import { sendServerData } from './api.js';
 import { pristine } from './validate.js';
+import { photoUploader } from './photo-uploader.js';
 
 const file = document.querySelector('#upload-file');
 const body = document.querySelector('body');
@@ -13,18 +14,17 @@ const inputHashtag = formUpload.querySelector('.text__hashtags');
 const inputDescription = formUpload.querySelector('.text__description');
 const button = formUpload.querySelector('.img-upload__submit');
 
-const successMessageTemplate = document
-  .querySelector('#success')
-  .content.querySelector('.success');
 
-const errorMessageTemplate = document
-  .querySelector('#error')
-  .content.querySelector('.error');
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+
 
 const onErrorMessage = errorMessageTemplate.cloneNode(true);
 const buttonErrorMessage = onErrorMessage.querySelector('.error__button');
 const onSuccessMessage = successMessageTemplate.cloneNode(true);
 const buttonSuccessMessage = onSuccessMessage.querySelector('.success__button');
+
 
 const messageStatusSubmit = (popappClass) => {
   switch (popappClass) {
@@ -45,24 +45,18 @@ const messageStatusSubmit = (popappClass) => {
   }
 };
 
+
 function onAnotherClosedError(evt) {
-  if (
-    isEscapeKey(evt) ||
-    evt.target === onErrorMessage ||
-    evt.target === buttonErrorMessage
-  ) {
+  if (isEscapeKey(evt) || evt.target === onErrorMessage || evt.target === buttonErrorMessage) {
     onErrorMessage.removeEventListener('click', onAnotherClosedError);
     body.removeEventListener('keydown', onAnotherClosedError);
     buttonErrorMessage.removeEventListener('click', onAnotherClosedError);
     document.body.removeChild(onErrorMessage);
   }
 }
+
 function onAnotherClosedSuccess(evt) {
-  if (
-    isEscapeKey(evt) ||
-    evt.target === onSuccessMessage ||
-    evt.target === buttonSuccessMessage
-  ) {
+  if (isEscapeKey(evt) || evt.target === onSuccessMessage || evt.target === buttonSuccessMessage) {
     onSuccessMessage.removeEventListener('click', onAnotherClosedSuccess);
     body.removeEventListener('keydown', onAnotherClosedSuccess);
     buttonSuccessMessage.removeEventListener('click', onAnotherClosedSuccess);
@@ -117,6 +111,7 @@ function openingImageForm() {
 file.addEventListener('change', (evt) => {
   evt.preventDefault();
   openingImageForm();
+  photoUploader();
 });
 
 const blockSubmitButton = () => {
@@ -136,20 +131,22 @@ const sendToServer = (onSuccess) => {
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      sendServerData(
-        () => {
-          onSuccess();
-          messageStatusSubmit(onSuccessMessage);
-          unblockSubmitButton();
-        },
-        () => {
-          messageStatusSubmit(onErrorMessage);
-          unblockSubmitButton();
-        },
-        new FormData(evt.target)
-      );
+      sendServerData(() => {
+        onSuccess();
+        messageStatusSubmit(onSuccessMessage);
+        unblockSubmitButton();
+      },
+      () => {
+        messageStatusSubmit(onErrorMessage);
+        unblockSubmitButton();
+      },
+      new FormData(evt.target));
     }
   });
 };
 
 sendToServer(closingImageForm);
+
+export {
+  openingImageForm,
+};

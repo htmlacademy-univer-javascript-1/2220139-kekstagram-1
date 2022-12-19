@@ -8,6 +8,7 @@ const randomFilter = filters.querySelector('#filter-random');
 const descussedPostsFilter = filters.querySelector('#filter-discussed');
 const defaultFilter = filters.querySelector('#filter-default');
 
+
 const removePictures = () => {
   const picturesAll = document.querySelectorAll('.picture');
   picturesAll.forEach((picture) => {
@@ -15,7 +16,7 @@ const removePictures = () => {
   });
 };
 
-const removeActiveClass = () => {
+const removeActiveButton = () => {
   const activeButton = document.querySelector('.img-filters__button--active');
   activeButton.classList.remove('img-filters__button--active');
 };
@@ -31,7 +32,7 @@ const onDescussedPostsFilter = (posts) => {
 
 };
 
-const ondefaultFilter = (posts) => posts.slice();
+const onDefaultPostsFilter = (posts) => posts.slice();
 
 function compareComments(postsA, postsB) {
   const commentsA = postsA.comments.length;
@@ -48,7 +49,7 @@ const renderFilters = (data) => {
   filters.classList.remove('img-filters--inactive');
   filters.addEventListener('click', debounce((evt) => {
     if (evt.target === randomFilter || evt.target === descussedPostsFilter || evt.target === defaultFilter) {
-      removeActiveClass();
+      removeActiveButton();
     }
     switch (evt.target) {
       case randomFilter:
@@ -60,7 +61,7 @@ const renderFilters = (data) => {
         descussedPostsFilter.classList.add('img-filters__button--active');
         break;
       case defaultFilter:
-        renderPicturesFilter(ondefaultFilter(data));
+        renderPicturesFilter(onDefaultPostsFilter(data));
         defaultFilter.classList.add('img-filters__button--active');
         break;
     }

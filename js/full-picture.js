@@ -8,6 +8,7 @@ const commentLoader = bigPicture.querySelector('.comments-loader');
 const commentList = bigPicture.querySelector('.social__comments');
 const commentContent = commentList.querySelector('.social__comment');
 const counterLoadComment = bigPicture.querySelector('.social__comment-count');
+
 let copyArrayComments = [];
 
 const onDocumentEscKeyDown = (evt) => {
@@ -26,11 +27,11 @@ function closeFullPicture() {
 }
 
 const getCommentItem = (comment) => {
-  const newElement = commentContent.cloneNode(true);
-  newElement.querySelector('.social__picture').src = comment.avatar;
-  newElement.querySelector('.social__picture').alt = comment.name;
-  newElement.querySelector('.social__text').textContent = comment.message;
-  return newElement;
+  const commentSimular = commentContent.cloneNode(true);
+  commentSimular.querySelector('.social__picture').src = comment.avatar;
+  commentSimular.querySelector('.social__picture').alt = comment.name;
+  commentSimular.querySelector('.social__text').textContent = comment.message;
+  return commentSimular;
 };
 
 const liveCommentCounter = () => {
@@ -51,6 +52,7 @@ const renderComments = (comments) => {
   commentList.appendChild(commentFragment);
   hidingCommentButton();
   liveCommentCounter();
+
 };
 
 function renderCommentList() {
@@ -63,8 +65,7 @@ const showFullPicture = (picture) => {
   bigPicture.querySelector('.likes-count').textContent = picture.likes;
   commentCount.textContent = picture.comments.length;
   counterLoadComment.textContent = `0 из ${commentCount.textContent} комментариев`;
-  bigPicture.querySelector('.social__caption').textContent =
-    picture.description;
+  bigPicture.querySelector('.social__caption').textContent = picture.description;
   bigPicture.classList.remove('hidden');
   commentLoader.classList.remove('hidden');
   bigPictureClosed.addEventListener('click', closeFullPicture);
@@ -74,4 +75,7 @@ const showFullPicture = (picture) => {
   commentList.innerHTML = '';
 };
 
-export { showFullPicture, renderCommentList };
+export {
+  showFullPicture,
+  renderCommentList,
+};

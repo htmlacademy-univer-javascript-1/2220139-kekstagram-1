@@ -33,7 +33,7 @@ const showAlert = (message) => {
   alertContainer.style.top = '0';
   alertContainer.style.right = '0';
   alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
+  alertContainer.style.fontSize = '20px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
 
@@ -57,5 +57,12 @@ const getRandomUniqueElements = (arr) => {
   }
   return elements;
 };
+export {
+  isEscapeKey,
+  getRandomElement,
+  getRandomNumber,
+  showAlert,
+  getRandomUniqueElements,
+  debounce,
+};
 
-export { isEscapeKey, getRandomElement, getRandomNumber, showAlert, getRandomUniqueElements, debounce, };

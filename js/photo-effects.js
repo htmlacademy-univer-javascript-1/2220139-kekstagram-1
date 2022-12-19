@@ -62,10 +62,14 @@ window.noUiSlider.create(slider, {
   },
   start: DEFAULT_EFFECT.max,
   step: DEFAULT_EFFECT.step,
-  connect: 'lower',
+  connect: 'lower'
 });
+
 updateSlider();
+
 form.addEventListener('change', onFormChange);
 slider.noUiSlider.on('update', onSliderUpdate);
 
-export { resetEffects };
+export {
+  resetEffects,
+};

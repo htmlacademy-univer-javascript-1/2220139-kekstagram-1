@@ -10,15 +10,10 @@ const formUpload = document.querySelector('.img-upload__form');
 const inputDescription = formUpload.querySelector('.text__description');
 const inputHashtag = formUpload.querySelector('.text__hashtags');
 
-const checkLengthDescriptionPhoto = (text) =>
-  text.length <= MAX_LENGTH_DESCRIPTION;
+const checkLengthDescriptionPhoto = (text) => text.length <= MAX_LENGTH_DESCRIPTION;
 
 const checkDublicateHashtags = (value) => {
-  const hashtags = value
-    .trim()
-    .toLowerCase()
-    .split(' ')
-    .filter((tag) => tag !== '');
+  const hashtags = value.trim().toLowerCase().split(' ').filter((tag) => tag !== '');
   const uniqueHashtags = new Set(hashtags);
   return uniqueHashtags.size === hashtags.length;
 };
@@ -31,11 +26,7 @@ const checkValidHashtags = (tags) => {
   return tags.trim().split(' ').every(checkOneHashtag);
 };
 
-const hashtagsMaxCount = (tags) =>
-  tags
-    .trim()
-    .split(' ')
-    .filter((tag) => tag !== '').length <= MAX_HASHTAG_COUNTS;
+const hashtagsMaxCount = (tags) => tags.trim().split(' ').filter((tag) => tag !== '').length <= MAX_HASHTAG_COUNTS;
 
 const pristine = new Pristine(formUpload, {
   classTo: 'img-upload__field-wrapper',
@@ -43,7 +34,7 @@ const pristine = new Pristine(formUpload, {
   successClass: 'img-upload__field-wrapper-valid',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'div',
-  errorTextClass: 'img-upload__field-wrapper-error',
+  errorTextClass: 'img-upload__field-wrapper-error'
 });
 
 pristine.addValidator(
@@ -67,4 +58,6 @@ pristine.addValidator(
   'Хэш-теги содержат недопустимые символы'
 );
 
-export { pristine };
+export {
+  pristine,
+};
