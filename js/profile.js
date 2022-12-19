@@ -4,7 +4,7 @@ import { randomAmountLikes } from './data.js';
 import { randomNumberComments } from './data.js';
 import { randomNumberID } from './data.js';
 import { DESCRIPTIONS } from './data.js';
-import { NAME } from './data.js';
+import { NAMES } from './data.js';
 import { MESSAGES } from './data.js';
 
 const createComment = (i) => ({
@@ -14,7 +14,7 @@ const createComment = (i) => ({
     randomAvatar.max
   )}.svg`,
   message: getRandomElement(MESSAGES),
-  name: getRandomElement(NAME),
+  name: getRandomElement(NAMES),
 });
 
 const generateRandomArrayComments = () => {
@@ -37,7 +37,7 @@ const createProfile = (i) => ({
   comments: generateRandomArrayComments(),
   avatar: `avatar-${getRandomNumber(randomAvatar.min, randomAvatar.max)}.svg`,
   message: getRandomElement(MESSAGES),
-  name: getRandomElement(NAME),
+  name: getRandomElement(NAMES),
 });
 
 const generateArrayProfiles = () => {
